@@ -412,6 +412,18 @@ object Finagle extends Build {
       )
     ).dependsOn(finagleCore, finagleThrift, finagleTest % "test")
 
+  lazy val finagleNeo4j = Project(
+    id = "finagle-neo4j",
+    base = file("finagle-neo4j"),
+    settings = Project.defaultSettings ++
+      sharedSettings
+    ).settings(
+      name := "finagle-neo4j",
+      libraryDependencies ++= Seq(
+        util("logging")
+      ) ++ jacksonLibs
+    ).dependsOn(finagleCore, finagleHttp)
+
   // Uses
 
   lazy val finagleStress = Project(
